@@ -35,8 +35,8 @@ pipeline{
         }
         stage('Run Docker Images Latest') {
             steps{
-                sh "./bash script/remove_container.sh"
-                sh "docker run -td --name app-nodejs-demo -p 3000:3000 $registry:$BUILD_NUMBER"
+                sh "docker stop app-nodejs-demo && docker rm app-nodejs-demo"
+                sh "docker run -td --restart unless-stopped --name app-nodejs-demo -p 3000:3000 $registry:$BUILD_NUMBER"
  
             }
         }
