@@ -31,7 +31,8 @@ pipeline{
         }
         stage('Remove Unused docker image') {
             steps{
-                sh "docker image rm $registry:$BUILD_NUMBER $registry:latest"
+                sh "docker image rm $registry:$BUILD_NUMBER"
+                sh "docker image rm $registry:latest"
             }
         }
         stage('Run Docker Images Latest') {
