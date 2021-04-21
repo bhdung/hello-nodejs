@@ -35,13 +35,18 @@ pipeline{
                 sh "docker image rm $registry:latest"
             }
         }
-        stage('Run Docker Images Latest') {
+        stage('Deploy over SSH'){
             steps{
-                sh "docker stop app-nodejs-demo && docker rm app-nodejs-demo"
-                sh "docker run -td --restart unless-stopped --name app-nodejs-demo -p 3000:3000 $registry:latest"
- 
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'server-deploy', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/home/jenkins/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
+//        stage('Run Docker Images Latest') {
+//            steps{
+//                sh "docker stop app-nodejs-demo && docker rm app-nodejs-demo"
+//               sh "docker run -td --restart unless-stopped --name app-nodejs-demo -p 3000:3000 $registry:latest"
+// 
+//            }
+//        }
         stage('Cleanup Images on Host'){
             steps{
                 sh "docker image prune -a --force"
