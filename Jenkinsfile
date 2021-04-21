@@ -31,13 +31,13 @@ pipeline{
         }
         stage('Remove Unused docker image') {
             steps{
-                sh "docker image rm $registry:$BUILD_NUMBER"
+                sh "docker image rm $registry:$BUILD_NUMBER $registry:latest"
             }
         }
         stage('Run Docker Images Latest') {
             steps{
                 sh "docker stop app-nodejs-demo && docker rm app-nodejs-demo"
-                sh "docker run -td --restart unless-stopped --name app-nodejs-demo -p 3000:3000 $registry:$BUILD_NUMBER"
+                sh "docker run -td --restart unless-stopped --name app-nodejs-demo -p 3000:3000 $registry:latest"
  
             }
         }
