@@ -40,6 +40,7 @@ pipeline{
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'server-deploy', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/home/jenkins/deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
+    }
 //        stage('Run Docker Images Latest') {
 //            steps{
 //                sh "docker stop app-nodejs-demo && docker rm app-nodejs-demo"
