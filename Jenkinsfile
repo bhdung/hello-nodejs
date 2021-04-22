@@ -9,7 +9,7 @@ pipeline{
     stages(){
         stage('Clone GitHub'){
             steps{
-                git clone 'https://github.com/bhdung/hello-nodejs.git' .
+                git 'https://github.com/bhdung/hello-nodejs.git'
             }
         }
         stage('Build Image Docker'){
