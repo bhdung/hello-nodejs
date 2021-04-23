@@ -33,6 +33,7 @@ pipeline{
             steps{
                 sh "docker image rm $registry:$BUILD_NUMBER"
                 sh "docker image rm $registry:latest"
+                sh "docker image prune -a -f"
             }
         }
         stage('Deploy over SSH'){
