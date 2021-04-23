@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . .
-RUN npm run test
+RUN npm test
 EXPOSE 3000
 CMD [ "node", "app.js" ]
